@@ -1,0 +1,18 @@
+import quandl    # Replace with your own Quandl API key   
+import matplotlib.pyplot as plt
+QUANDL_API_KEY = 'i1dTC927SJn-g6EmxWps'     
+quandl.ApiConfig.api_key = QUANDL_API_KEY   
+df = quandl.get('EURONEXT/ABN')
+prices = df['Last']  
+volumes = df['Volume']
+
+# The top plot consisting of daily closing prices 
+top = plt.subplot2grid((4, 4), (0, 0), rowspan=3, colspan=4)  
+top.plot(prices.index, prices, label='Last')    
+plt.title('ABN Last Price from 2015 - 2018')   
+plt.legend(loc=2)    # The bottom plot consisting of daily trading volume  
+bottom = plt.subplot2grid((4, 4), (3,0), rowspan=1, colspan=4)    
+bottom.bar(volumes.index, volumes)   
+plt.title('ABN Daily Trading Volume')  
+plt.gcf().set_size_inches(12, 8)  
+plt.subplots_adjust(hspace=0.75)
