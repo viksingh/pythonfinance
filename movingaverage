@@ -1,0 +1,16 @@
+import json
+import csv
+import urllib.request
+from requests import request
+import json
+
+import pandas as pd
+import glob
+
+from pandas.io.json import json_normalize
+df = pd.read_csv('/temp/sample.csv', index_col=None, header=0)
+
+df['MA'] = df['B'].rolling(window=3).mean()
+
+
+print(df)
