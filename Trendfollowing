@@ -1,0 +1,17 @@
+import pandas as pd
+import glob
+
+path = r'/temp/nasdaq' # use your path
+all_files = glob.glob(path + "/*.txt")
+
+li = []
+
+for filename in all_files:
+    df = pd.read_csv(filename, index_col=None, header=0)
+    df['Stock']= filename.split('.')[0].replace('/temp/nasdaq/','')
+    print('Read ' + filename)
+    li.append(df)
+
+frame = pd.concat(li, axis=0, ignore_index=True)
+
+print(frame.head())
