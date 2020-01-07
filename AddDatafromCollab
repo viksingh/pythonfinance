@@ -1,0 +1,11 @@
+from google.colab import drive
+drive.mount('/content/drive')
+
+From a Colab notebook, type the following:
+from google.colab import drive
+drive.mount('/content/drive')
+Just like with the third method, the commands will bring you to a Google Authentication step. You should see a screen with Google Drive File Stream wants to access your Google Account. After you allow permission, copy the given verification code and paste it in the box in Colab.
+In the notebook, click on the charcoal > on the top left of the notebook and click on Files. Locate the data folder you created earlier and find your data. Right-click on your data and select Copy Path. Store this copied path into a variable and you are ready to go.
+path = "copied path"
+df_bonus = pd.read_csv(path)
+# Dataset is now stored in a Pandas Dataframe
