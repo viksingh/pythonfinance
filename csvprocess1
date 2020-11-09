@@ -1,0 +1,33 @@
+import time
+start_time = time.time()
+
+import pandas as pd
+curr_file = 'C:\\Users\\ausinghvi\\InterfaceUsageFiles\\Updated\\EBS Dec 2019.csv'
+df_curr_file= pd.read_csv(curr_file)
+#print(df_curr_file)
+
+old_file = 'C:\\Users\\ausinghvi\\InterfaceUsageFiles\\Updated\\Server -EBS Dec 2019.csv'
+df_old_file= pd.read_csv(old_file)
+#print(df_old_file)
+
+combined_data=pd.DataFrame()
+
+for row in df_old_file.itertuples():
+    df_temp = df_curr_file.loc[ (row[2]==df_curr_file['Type']) & (row[3]==df_curr_file['Sender BS']) & (row[4]==df_curr_file['Receiver BS']) &(row[5]==df_curr_file['Interface']) &(row[7]==df_curr_file['Rcv Int'])]
+    for row_temp in df_temp.itertuples():
+        if ( not(row_temp[16]) & ((row[16]))
+            row[16] = row_temp[16]
+    print( df_temp.shape)
+    if (df_temp.shape[0] > 1):
+        print(df_temp)
+    if (df_temp.shape[0] == 0):
+        combined_data=combined_data.append(row,ignore_index=True)
+            
+    combined_data=combined_data.append(df_temp,ignore_index=True)
+    
+
+
+combined_data.to_csv('C:\\Users\\ausinghvi\\InterfaceUsageFiles\\Updated\\NewEBSDec2019.csv', index=False)
+
+print("--- %s seconds ---" % (time.time() - start_time))    
+
